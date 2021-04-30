@@ -1,11 +1,10 @@
-package com.example.rxjavatutorial
+package com.example.rxjavatutorial.ui.main
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rxjavatutorial.databinding.ItemButtonBinding
 import com.example.rxjavatutorial.model.RxButton
-import kotlinx.android.synthetic.main.item_button.view.*
 
 /**
  * @author at-vinhnguyen on 4/22/21.
@@ -13,11 +12,12 @@ import kotlinx.android.synthetic.main.item_button.view.*
 class RxSelectionAdapter(private val buttons: MutableList<RxButton>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    public var onButtonClicked: (position : Int) -> Unit = {}
+    internal var onButtonClicked: (position: Int) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val itemButtonBinding = ItemButtonBinding.inflate(LayoutInflater.from(parent.context))
         return RxSelectionViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_button, parent, false)
+            itemButtonBinding
         )
     }
 
@@ -29,15 +29,16 @@ class RxSelectionAdapter(private val buttons: MutableList<RxButton>) :
 
     override fun getItemCount() = buttons.size
 
-    inner class RxSelectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class RxSelectionViewHolder(private val itemButtonBinding: ItemButtonBinding) :
+        RecyclerView.ViewHolder(itemButtonBinding.root) {
         init {
-            itemView.btnRx.setOnClickListener {
+            itemButtonBinding.btnRx.setOnClickListener {
                 onButtonClicked.invoke(adapterPosition)
             }
         }
 
         fun bindView(position: Int) {
-            itemView.btnRx.text = buttons[position].name
+            itemButtonBinding.btnRx.text = buttons[position].name
         }
     }
 }
