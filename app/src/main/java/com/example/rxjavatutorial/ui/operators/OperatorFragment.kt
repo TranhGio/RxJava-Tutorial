@@ -1,7 +1,6 @@
 package com.example.rxjavatutorial.ui.operators
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,15 +21,23 @@ class OperatorFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val adapter: OperatorAdapter by lazy {
-        OperatorAdapter(mutableListOf(RxOperatorsButton.SIMPLE)).apply {
+        OperatorAdapter(
+            mutableListOf(
+                RxOperatorsButton.SIMPLE,
+                RxOperatorsButton.DISPOSABLE
+            )
+        ).apply {
             operatorButtonClicked = { position ->
                 when (position) {
+
                     RxOperatorsButton.SIMPLE.ordinal -> {
-                        openSimpleFragment()
+                        (activity as? OperatorActivity)?.openSimpleFragment()
+                    }
+                    RxOperatorsButton.DISPOSABLE.ordinal -> {
+                        (activity as? OperatorActivity)?.openDisposableFragment()
                     }
                     //Todo add button handle later
                     else -> {
-                        Log.i("xxx", "Else")
                     }
                 }
             }
@@ -59,9 +66,5 @@ class OperatorFragment : Fragment() {
     private fun initViews() {
         binding.rvOperator.setHasFixedSize(true)
         binding.rvOperator.adapter = adapter
-    }
-
-    private fun openSimpleFragment() {
-        (activity as? OperatorActivity)?.openSimpleFragment()
     }
 }

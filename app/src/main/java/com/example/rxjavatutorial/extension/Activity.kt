@@ -17,13 +17,17 @@ fun AppCompatActivity.replaceFragment(
     fragment: Fragment,
     addToBackStack: Boolean = false
 ) {
-    supportFragmentManager.beginTransaction()
-        .replace(containerId, fragment, if (addToBackStack) fragment.tag else null).commit()
+    val transaction = supportFragmentManager.beginTransaction()
+    transaction.replace(containerId, fragment)
+    if (addToBackStack) transaction.addToBackStack(fragment::javaClass.name)
+    transaction.commit()
 }
 
 fun AppCompatActivity.addFragment(containerId: Int, fragment: Fragment, addToBackStack: Boolean) {
-    supportFragmentManager.beginTransaction()
-        .add(containerId, fragment, if (addToBackStack) fragment.tag else null).commit()
+    val transaction = supportFragmentManager.beginTransaction()
+    transaction.add(containerId, fragment)
+    if (addToBackStack) transaction.addToBackStack(fragment::javaClass.name)
+    transaction.commit()
 }
 
 inline fun <reified T : Any> Activity.startActivity(

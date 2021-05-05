@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RxJavaTutorial</string>
+    <string name="placeHolder">%s</string>
+    <string name="do_some_work">Do Some Work</string>
 </resources>
