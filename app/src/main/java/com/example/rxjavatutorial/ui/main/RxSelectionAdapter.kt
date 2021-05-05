@@ -15,10 +15,9 @@ class RxSelectionAdapter(private val buttons: MutableList<RxButton>) :
     internal var onButtonClicked: (position: Int) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val itemButtonBinding = ItemButtonBinding.inflate(LayoutInflater.from(parent.context))
-        return RxSelectionViewHolder(
-            itemButtonBinding
-        )
+        val itemButtonBinding =
+            ItemButtonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return RxSelectionViewHolder(itemButtonBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -26,6 +25,7 @@ class RxSelectionAdapter(private val buttons: MutableList<RxButton>) :
             holder.bindView(position)
         }
     }
+
 
     override fun getItemCount() = buttons.size
 

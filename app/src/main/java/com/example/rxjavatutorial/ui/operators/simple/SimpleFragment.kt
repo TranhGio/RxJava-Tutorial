@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.example.rxjavatutorial.BaseFragment
+import com.example.rxjavatutorial.R
 import com.example.rxjavatutorial.databinding.FragmentSampleBinding
-import com.example.rxjavatutorial.extension.log
 import io.reactivex.Observable
 import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 /**
  * @author at-vinhnguyen on 4/26/21.
  */
-class SimpleFragment : Fragment() {
+class SimpleFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SimpleFragment()
@@ -42,40 +43,52 @@ class SimpleFragment : Fragment() {
 
     private fun doSomeWork() {
         getObservable()
-            .observeOn(Schedulers.io())
             // Run on Background Thread
             .subscribeOn(Schedulers.io())
             // Be notified on the main thread
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(getObserver())
     }
 
-    private fun getObservable() = Observable.just("Exciter", "Winner", "SH", "Vespa")
-
-    private fun getObserver(): Observer<String> {
+    override fun <String> getObserver(): Observer<String> {
         return object : Observer<String> {
             override fun onSubscribe(d: Disposable) {
-                log("onSubscribe: ${d.isDisposed}")
-                log(Thread.currentThread().name)
+                binding.tvResult.text =
+                    getString(
+                        R.string.placeHolder,
+                        binding.tvResult.text.toString() + "\n onSubscribe: " + d.isDisposed
+                    )
             }
 
             override fun onNext(t: String) {
-                Thread.sleep(3000)
-                log("onNext: $t")
-                log(Thread.currentThread().name)
-                binding.tvResult.text = t
+                binding.tvResult.text =
+                    getString(
+                        R.string.placeHolder,
+                        binding.tvResult.text.toString() + "\n onNext: " + t
+                    )
             }
 
             override fun onError(e: Throwable) {
-                log("onError: $e")
-                log(Thread.currentThread().name)
+                binding.tvResult.text =
+                    getString(
+                        R.string.placeHolder,
+                        binding.tvResult.text.toString() + "\n onError: " + e.message
+                    )
             }
 
             override fun onComplete() {
-                log("onComplete")
-                log(Thread.currentThread().name)
+                binding.tvResult.text =
+                    getString(
+                        R.string.placeHolder,
+                        binding.tvResult.text.toString() + "\n onComplete"
+                    )
+
             }
         }
     }
+
+    override fun getObservable(): Observable<String> =
+        Observable.just("Steven", "Frank", "Paul", "David", "Michel")
 
     override fun onDestroyView() {
         super.onDestroyView()

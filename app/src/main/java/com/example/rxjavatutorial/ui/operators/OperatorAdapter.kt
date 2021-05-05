@@ -15,9 +15,10 @@ class OperatorAdapter(private val rxOperatorsButtons: MutableList<RxOperatorsBut
 
     internal var operatorButtonClicked: (position: Int) -> Unit = {}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = OperatorViewHolder(
-        ItemButtonBinding.inflate(LayoutInflater.from(parent.context))
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OperatorViewHolder {
+        val view = ItemButtonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return OperatorViewHolder(view)
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as? OperatorViewHolder)?.bindView(position)
