@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rxjavatutorial.R
 import com.example.rxjavatutorial.extension.replaceFragment
+import com.example.rxjavatutorial.ui.operators.createobservable.CreateObservableFragment
+import com.example.rxjavatutorial.ui.operators.createobservable.RangeFragment
+import com.example.rxjavatutorial.ui.operators.createobservable.RepeatFragment
 import com.example.rxjavatutorial.ui.operators.disposable.DisposableFragment
 import com.example.rxjavatutorial.ui.operators.filter.FilterFragment
 import com.example.rxjavatutorial.ui.operators.map.MapFragment
@@ -41,7 +44,15 @@ class OperatorActivity : AppCompatActivity() {
         replaceFragment(R.id.frmContainer, MapFragment.newInstance(), true)
     }
 
-    fun openFlatMapFragment() {
-        replaceFragment(R.id.frmContainer, MapFragment.newInstance(), true)
+    fun openCreateObservableFragment() {
+        replaceFragment(R.id.frmContainer, CreateObservableFragment.newInstance(), true)
+    }
+
+    fun openRangeFragment() {
+        replaceFragment(R.id.frmContainer, RangeFragment.newInstance(), true)
+    }
+
+    fun openRepeatFragment() {
+        replaceFragment(R.id.frmContainer, RepeatFragment.newInstance(), true)
     }
 }

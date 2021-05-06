@@ -28,7 +28,10 @@ class OperatorFragment : Fragment() {
                 RxOperatorsButton.DISPOSABLE,
                 RxOperatorsButton.FILTER,
                 RxOperatorsButton.MAP,
-                RxOperatorsButton.FLAT_MAP
+                RxOperatorsButton.FLAT_MAP,
+                RxOperatorsButton.CREATE_OBSERVABLE,
+                RxOperatorsButton.RANGE,
+                RxOperatorsButton.REPEAT
             )
         ).apply {
             operatorButtonClicked = { position ->
@@ -47,6 +50,15 @@ class OperatorFragment : Fragment() {
                     }
                     RxOperatorsButton.FLAT_MAP.ordinal -> {
 
+                    }
+                    RxOperatorsButton.CREATE_OBSERVABLE.ordinal -> {
+                        (activity as? OperatorActivity)?.openCreateObservableFragment()
+                    }
+                    RxOperatorsButton.RANGE.ordinal -> {
+                        (activity as? OperatorActivity)?.openRangeFragment()
+                    }
+                    RxOperatorsButton.REPEAT.ordinal -> {
+                        (activity as? OperatorActivity)?.openRepeatFragment()
                     }
                     //Todo add button handle later
                     else -> {
