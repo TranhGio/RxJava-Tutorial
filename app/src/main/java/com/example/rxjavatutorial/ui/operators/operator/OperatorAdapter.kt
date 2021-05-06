@@ -1,4 +1,4 @@
-package com.example.rxjavatutorial.ui.operators
+package com.example.rxjavatutorial.ui.operators.operator
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
