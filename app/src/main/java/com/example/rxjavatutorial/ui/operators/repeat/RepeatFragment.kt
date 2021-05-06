@@ -44,6 +44,12 @@ class RepeatFragment : BaseFragment() {
     private fun doSomeWork() {
         getObservable()
             .repeat(3)
+
+
+
+
+
+
             // Run on Background Thread
             .subscribeOn(Schedulers.io())
             // Be notified on the main thread

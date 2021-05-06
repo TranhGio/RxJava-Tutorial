@@ -30,7 +30,8 @@ class OperatorFragment : Fragment() {
                 RxOperatorsButton.MAP,
                 RxOperatorsButton.FLAT_MAP,
                 RxOperatorsButton.CREATE_OBSERVABLE,
-                RxOperatorsButton.RANGE
+                RxOperatorsButton.RANGE,
+                RxOperatorsButton.REPEAT
             )
         ).apply {
             operatorButtonClicked = { position ->
