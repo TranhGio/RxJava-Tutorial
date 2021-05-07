@@ -31,7 +31,9 @@ class OperatorFragment : Fragment() {
                 RxOperatorsButton.FLAT_MAP,
                 RxOperatorsButton.CREATE_OBSERVABLE,
                 RxOperatorsButton.RANGE,
-                RxOperatorsButton.REPEAT
+                RxOperatorsButton.REPEAT,
+                RxOperatorsButton.INTERVAL,
+                RxOperatorsButton.TIMER,
             )
         ).apply {
             operatorButtonClicked = { position ->
@@ -59,6 +61,12 @@ class OperatorFragment : Fragment() {
                     }
                     RxOperatorsButton.REPEAT.ordinal -> {
                         (activity as? OperatorActivity)?.openRepeatFragment()
+                    }
+                    RxOperatorsButton.INTERVAL.ordinal -> {
+                        (activity as? OperatorActivity)?.openIntervalFragment()
+                    }
+                    RxOperatorsButton.TIMER.ordinal -> {
+                        (activity as? OperatorActivity)?.openTimerFragment()
                     }
                     //Todo add button handle later
                     else -> {

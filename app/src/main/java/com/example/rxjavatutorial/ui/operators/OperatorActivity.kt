@@ -9,6 +9,8 @@ import com.example.rxjavatutorial.ui.operators.createobservable.RangeFragment
 import com.example.rxjavatutorial.ui.operators.createobservable.RepeatFragment
 import com.example.rxjavatutorial.ui.operators.disposable.DisposableFragment
 import com.example.rxjavatutorial.ui.operators.filter.FilterFragment
+import com.example.rxjavatutorial.ui.operators.interval.IntervalFragment
+import com.example.rxjavatutorial.ui.operators.timer.TimerFragment
 import com.example.rxjavatutorial.ui.operators.map.MapFragment
 import com.example.rxjavatutorial.ui.operators.operator.OperatorFragment
 import com.example.rxjavatutorial.ui.operators.simple.SimpleFragment
@@ -54,5 +56,13 @@ class OperatorActivity : AppCompatActivity() {
 
     fun openRepeatFragment() {
         replaceFragment(R.id.frmContainer, RepeatFragment.newInstance(), true)
+    }
+
+    fun openIntervalFragment() {
+        replaceFragment(R.id.frmContainer, IntervalFragment.newInstance(), true)
+    }
+
+    fun openTimerFragment() {
+        replaceFragment(R.id.frmContainer, TimerFragment.newInstance(), true)
     }
 }
