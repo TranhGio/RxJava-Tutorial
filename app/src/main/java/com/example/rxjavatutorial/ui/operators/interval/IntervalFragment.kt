@@ -11,6 +11,7 @@ import com.example.rxjavatutorial.ui.operators.timer.TimerFragment
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -21,11 +22,12 @@ import java.util.concurrent.TimeUnit
 class IntervalFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = TimerFragment()
+        fun newInstance() = IntervalFragment()
     }
 
     private var _binding: FragmentSampleBinding? = null
     private val binding get() = _binding!!
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,10 +52,12 @@ class IntervalFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        compositeDisposable.clear()
     }
 
     override fun <T> getObserver() = object : Observer<T> {
         override fun onSubscribe(d: Disposable) {
+            compositeDisposable.add(d)
             binding.tvResult.text =
                 getString(
                     R.string.placeHolder,

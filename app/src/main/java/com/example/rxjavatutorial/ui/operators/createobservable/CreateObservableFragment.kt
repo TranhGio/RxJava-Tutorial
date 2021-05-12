@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers
 class CreateObservableFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = RepeatFragment()
+        fun newInstance() = CreateObservableFragment()
     }
 
     private var _binding: FragmentSampleBinding? = null

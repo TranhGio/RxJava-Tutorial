@@ -9,11 +9,12 @@ import com.example.rxjavatutorial.ui.operators.createobservable.RangeFragment
 import com.example.rxjavatutorial.ui.operators.createobservable.RepeatFragment
 import com.example.rxjavatutorial.ui.operators.disposable.DisposableFragment
 import com.example.rxjavatutorial.ui.operators.filter.FilterFragment
+import com.example.rxjavatutorial.ui.operators.interval.CollectionFragment
 import com.example.rxjavatutorial.ui.operators.interval.IntervalFragment
-import com.example.rxjavatutorial.ui.operators.timer.TimerFragment
 import com.example.rxjavatutorial.ui.operators.map.MapFragment
 import com.example.rxjavatutorial.ui.operators.operator.OperatorFragment
 import com.example.rxjavatutorial.ui.operators.simple.SimpleFragment
+import com.example.rxjavatutorial.ui.operators.timer.TimerFragment
 
 /**
  * @author at-vinhnguyen on 4/26/21.
@@ -64,5 +65,9 @@ class OperatorActivity : AppCompatActivity() {
 
     fun openTimerFragment() {
         replaceFragment(R.id.frmContainer, TimerFragment.newInstance(), true)
+    }
+
+    fun openCollectionFragment() {
+        replaceFragment(R.id.frmContainer, CollectionFragment.newInstance(), true)
     }
 }

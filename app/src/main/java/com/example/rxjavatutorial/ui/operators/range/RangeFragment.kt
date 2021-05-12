@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers
 class RangeFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = RepeatFragment()
+        fun newInstance() = RangeFragment()
     }
 
     private var _binding: FragmentSampleBinding? = null
