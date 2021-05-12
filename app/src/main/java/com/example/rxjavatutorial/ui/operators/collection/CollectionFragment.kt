@@ -1,4 +1,4 @@
-package com.example.rxjavatutorial.ui.operators.timer
+package com.example.rxjavatutorial.ui.operators.interval
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,21 +13,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 /**
  * @author mvn-vinhnguyen on 5/6/21.
  */
-class TimerFragment : BaseFragment() {
+class CollectionFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = TimerFragment()
+        fun newInstance() = CollectionFragment()
     }
 
     private var _binding: FragmentSampleBinding? = null
     private val binding get() = _binding!!
-    private var nowTime: Long = 0
-    private var compositeDisposable = CompositeDisposable()
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,11 +50,11 @@ class TimerFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        compositeDisposable.clear()
     }
 
     override fun <T> getObserver() = object : Observer<T> {
         override fun onSubscribe(d: Disposable) {
-            nowTime = System.currentTimeMillis()
             compositeDisposable.add(d)
             binding.tvResult.text =
                 getString(
@@ -69,7 +67,7 @@ class TimerFragment : BaseFragment() {
             binding.tvResult.text =
                 getString(
                     R.string.placeHolder,
-                    binding.tvResult.text.toString() + "\n onNext: ${(System.currentTimeMillis() - nowTime) / 1000} second elapsed"
+                    binding.tvResult.text.toString() + "\n onNext: " + t
                 )
         }
 
@@ -91,8 +89,20 @@ class TimerFragment : BaseFragment() {
     }
 
     override fun getObservable(): Observable<String> {
-        return Observable.timer(5, TimeUnit.SECONDS, Schedulers.io()).map { it.toString() }
+        val array = arrayOf("Steven", "Frank", "Paul", "David", "Michel")
+        return Observable.fromArray(*array)
     }
+//    override fun getObservable(): Observable<String> {
+//        val arrayList = arrayListOf<String>("Steven", "Frank", "Paul", "David", "Michel")
+//        return Observable.fromIterable(arrayList)
+//    }
+//    override fun getObservable(): Observable<String> {
+//        val arrayList = arrayListOf<String>("Steven", "Frank", "Paul", "David", "Michel")
+//        val callable = Observable.fromCallable(object : Callable<String> {
+//            override fun call() = arrayList.first()
+//        })
+//        return callable
+//    }
 
     private fun doSomeWorks() {
         getObservable().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())

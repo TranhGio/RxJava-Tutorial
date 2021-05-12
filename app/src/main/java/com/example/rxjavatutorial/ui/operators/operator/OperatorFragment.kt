@@ -34,6 +34,7 @@ class OperatorFragment : Fragment() {
                 RxOperatorsButton.REPEAT,
                 RxOperatorsButton.INTERVAL,
                 RxOperatorsButton.TIMER,
+                RxOperatorsButton.COLLECTION,
             )
         ).apply {
             operatorButtonClicked = { position ->
@@ -67,6 +68,9 @@ class OperatorFragment : Fragment() {
                     }
                     RxOperatorsButton.TIMER.ordinal -> {
                         (activity as? OperatorActivity)?.openTimerFragment()
+                    }
+                    RxOperatorsButton.COLLECTION.ordinal -> {
+                        (activity as? OperatorActivity)?.openCollectionFragment()
                     }
                     //Todo add button handle later
                     else -> {
